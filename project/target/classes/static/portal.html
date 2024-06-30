@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Content Portal</title>
+</head>
+<body>
+<h1>Content List</h1>
+<ul>
+    <li th:each="content : ${contentList}">
+        <h2 th:text="${content.title}">Content Title</h2>
+        <p th:text="${content.body}">Content Body</p>
+    </li>
+</ul>
+</body>
+</html>

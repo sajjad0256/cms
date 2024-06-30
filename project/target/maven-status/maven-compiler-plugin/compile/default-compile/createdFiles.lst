@@ -1,0 +1,15 @@
+org\example\cms\controller\ContentController.class
+org\example\cms\repository\UserRepository.class
+org\example\cms\model\Content.class
+org\example\cms\service\UserDetailsServiceImpl.class
+org\example\cms\config\SecurityConfig.class
+org\example\cms\model\User.class
+org\example\cms\controller\UserController.class
+org\example\cms\Main.class
+org\example\cms\controller\WebController.class
+org\example\cms\config\WebConfig.class
+org\example\cms\repository\ContentRepository.class
+org\example\cms\service\WordPressService.class
+org\example\cms\service\ContentService.class
+org\example\cms\controller\WordPressController.class
+org\example\cms\service\UserService.class

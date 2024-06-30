@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Edit User</h2>
+    <div class="form-group">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId">
+    </div>
+    <div class="form-group">
+        <label for="newUsername">New Username:</label>
+        <input type="text" id="newUsername" name="newUsername">
+    </div>
+    <div class="form-group">
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword">
+    </div>
+    <button onclick="editUser()">Edit</button>
+</div>
+<script>
+    function editUser() {
+        var userId = document.getElementById("userId").value;
+        var newUsername = document.getElementById("newUsername").value;
+        var newPassword = document.getElementById("newPassword").value;
+
+        fetch(`/edit-user/${userId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username: newUsername, password: newPassword })
+        }).then(response => {
+            if (response.ok) {
+                alert("User updated successfully");
+            } else {
+                alert("Error updating user");
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+            alert("Error updating user");
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Content</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Update Content</h2>
+    <div class="form-group">
+        <label for="id">Content ID:</label>
+        <input type="text" id="id" name="id">
+    </div>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+    </div>
+    <div class="form-group">
+        <label for="body">Body:</label>
+        <textarea id="body" name="body"></textarea>
+    </div>
+    <button onclick="updateContent()">Update</button>
+</div>
+
+<script>
+    function updateContent() {
+        var id = document.getElementById("id").value;
+        var title = document.getElementById("title").value;
+        var body = document.getElementById("body").value;
+
+        // تأیید وجود مقادیر
+        if (id.trim() === '' || title.trim() === '' || body.trim() === '') {
+            alert("ID, Title and Body cannot be empty");
+            return;
+        }
+
+        console.log("Updating content with ID:", id, "title:", title, "and body:", body);
+
+        fetch(`/update-content/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title: title, body: body })
+        }).then(response => {
+            if (response.ok) {
+                alert("Content updated successfully");
+            } else {
+                alert("Error updating content");
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+            alert("Error updating content");
+        });
+    }
+</script>
+</body>
+</html>

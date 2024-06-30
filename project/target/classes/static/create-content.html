@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Content</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Create Content</h2>
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+    </div>
+    <div class="form-group">
+        <label for="body">Body:</label>
+        <textarea id="body" name="body"></textarea>
+    </div>
+    <button onclick="createContent()">Create</button>
+</div>
+
+<script>
+    function createContent() {
+        var title = document.getElementById("title").value;
+        var body = document.getElementById("body").value;
+
+        // تأیید وجود مقادیر
+        if (title.trim() === '' || body.trim() === '') {
+            alert("Title and Body cannot be empty");
+            return;
+        }
+
+        fetch("/create-content", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title: title, body: body })
+        }).then(response => {
+            if (response.ok) {
+                alert("Content created successfully");
+                // پاک کردن فیلدهای فرم برای ورود دیگر
+                document.getElementById("title").value = '';
+                document.getElementById("body").value = '';
+            } else {
+                alert("Error creating content");
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+            alert("Error creating content");
+        });
+    }
+</script>
+</body>
+</html>

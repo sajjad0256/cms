@@ -1,0 +1,3 @@
+org\example\cms\connectionTest\SqlConnectionTest.class
+org\example\cms\repository\UserTest.class
+org\example\cms\repository\ContentTest.class

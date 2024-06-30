@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Content</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Delete Content</h2>
+    <div class="form-group">
+        <label for="id">Content ID:</label>
+        <input type="text" id="id" name="id">
+    </div>
+    <button onclick="deleteContent()">Delete</button>
+</div>
+
+<script>
+    function deleteContent() {
+        var id = document.getElementById("id").value;
+
+        // تأیید وجود مقدار
+        if (id.trim() === '') {
+            alert("ID cannot be empty");
+            return;
+        }
+
+        console.log("Deleting content with ID:", id);
+
+        fetch(`/delete-content/${id}`, {
+            method: "DELETE"
+        }).then(response => {
+            if (response.ok) {
+                alert("Content deleted successfully");
+            } else {
+                alert("Error deleting content");
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+            alert("Error deleting content");
+        });
+    }
+</script>
+</body>
+</html>

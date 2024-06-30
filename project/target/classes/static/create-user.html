@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Content</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Create User</h2>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+    </div>
+    <button onclick="createUser()">Create</button>
+</div>
+
+<script>
+    function createUser() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        fetch("/create-user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username: username, password: password })
+        }).then(response => {
+            if (response.ok) {
+                alert("User created successfully");
+                window.location.href = "/list";
+            } else {
+                alert("Error creating user");
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+            alert("Error creating user");
+        });
+    }
+</script>
+</body>
+</html>
